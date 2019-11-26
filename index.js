@@ -69,6 +69,10 @@ app.post("/notes", (request, response) => {
   response.json(note);
 });
 
+const cors = require("cors");
+
+app.use(cors());
+
 app.delete("/notes/:id", (request, response) => {
   const id = Number(request.params.id);
   notes = notes.filter(note => note.id !== id);
@@ -76,7 +80,7 @@ app.delete("/notes/:id", (request, response) => {
   response.status(204).end();
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
